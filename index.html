@@ -674,6 +674,179 @@
       min-height: 150px;
       resize: vertical;
     }
+
+    /* Chatbot Widget */
+    .chatbot-widget {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .chatbot-toggle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%);
+      border: none;
+      color: white;
+      font-size: 28px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chatbot-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(124, 58, 237, 0.6);
+    }
+
+    .chatbot-window {
+      position: absolute;
+      bottom: 90px;
+      right: 0;
+      width: 380px;
+      height: 500px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      animation: slideUp 0.3s ease;
+    }
+
+    .chatbot-window.active {
+      display: flex;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .chatbot-header {
+      background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%);
+      color: white;
+      padding: 16px;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .chatbot-close {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .chatbot-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .chatbot-message {
+      padding: 10px 14px;
+      border-radius: 12px;
+      max-width: 85%;
+      word-wrap: break-word;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .chatbot-message.bot {
+      background: rgba(168, 85, 247, 0.2);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      color: #dbe4f0;
+      align-self: flex-start;
+    }
+
+    .chatbot-message.user {
+      background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%);
+      color: white;
+      align-self: flex-end;
+    }
+
+    .chatbot-input-area {
+      padding: 12px;
+      border-top: 1px solid rgba(168, 85, 247, 0.2);
+      display: flex;
+      gap: 8px;
+    }
+
+    .chatbot-input {
+      flex: 1;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      background: rgba(15, 23, 42, 0.6);
+      color: #e5e7eb;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .chatbot-input:focus {
+      border-color: rgba(168, 85, 247, 0.6);
+      box-shadow: 0 0 8px rgba(168, 85, 247, 0.2);
+    }
+
+    .chatbot-send {
+      background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%);
+      border: none;
+      color: white;
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .chatbot-send:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+    }
+
+    .chatbot-quick-replies {
+      padding: 8px 12px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .quick-reply-btn {
+      background: rgba(168, 85, 247, 0.1);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      color: #a78bfa;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.3s ease;
+      text-align: left;
+    }
+
+    .quick-reply-btn:hover {
+      background: rgba(168, 85, 247, 0.2);
+      border-color: rgba(168, 85, 247, 0.6);
+    }
     
     footer {
       padding: 40px 0;
@@ -1045,6 +1218,32 @@
     </section>
   </main>
 
+  <!-- Chatbot Widget -->
+  <div class="chatbot-widget">
+    <button class="chatbot-toggle" id="chatbotToggle" title="Open AI Assistant">💬</button>
+    <div class="chatbot-window" id="chatbotWindow">
+      <div class="chatbot-header">
+        <span>🤖 Kael Core Assistant</span>
+        <button class="chatbot-close" id="chatbotClose">✕</button>
+      </div>
+      <div class="chatbot-messages" id="chatbotMessages">
+        <div class="chatbot-message bot">
+          Hi! 👋 I'm Kael Core Assistant. How can I help you today? Feel free to ask about our features, pricing, use cases, or anything else!
+        </div>
+      </div>
+      <div class="chatbot-quick-replies" id="quickReplies">
+        <button class="quick-reply-btn">Tell me about pricing</button>
+        <button class="quick-reply-btn">What are the features?</button>
+        <button class="quick-reply-btn">How long does integration take?</button>
+        <button class="quick-reply-btn">Contact sales team</button>
+      </div>
+      <div class="chatbot-input-area">
+        <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Type your message..." />
+        <button class="chatbot-send" id="chatbotSend">→</button>
+      </div>
+    </div>
+  </div>
+
   <footer>
     <div class="container">
       <div class="footer-content">
@@ -1154,44 +1353,226 @@
       themeToggle.textContent = theme === 'light' ? '☀️' : '🌙';
     });
 
-    // Animated Stats Counter
-    function animateCounter(element, target, duration = 2000) {
-      let start = 0;
-      const increment = target / (duration / 16);
-      
-      const timer = setInterval(() => {
-        start += increment;
-        if (start >= target) {
-          element.textContent = target;
-          clearInterval(timer);
-        } else {
-          element.textContent = Math.floor(start);
+    // ============================================================================
+    // CHATBOT IMPLEMENTATION
+    // ============================================================================
+
+    const chatbotToggle = document.getElementById('chatbotToggle');
+    const chatbotClose = document.getElementById('chatbotClose');
+    const chatbotWindow = document.getElementById('chatbotWindow');
+    const chatbotMessages = document.getElementById('chatbotMessages');
+    const chatbotInput = document.getElementById('chatbotInput');
+    const chatbotSend = document.getElementById('chatbotSend');
+    const quickReplies = document.getElementById('quickReplies');
+
+    // Chatbot responses database
+    const chatbotResponses = {
+      pricing: 'We offer three pricing tiers:\n• Starter: $299/mo (1M API calls, 2 AI agents)\n• Professional: $999/mo (15M API calls, 10 AI agents)\n• Enterprise: Custom pricing (Unlimited everything)\n\nWhich tier interests you?',
+      features: 'Kael Core has three core features:\n• Neural Orchestration - Scale complex multi-agent tasks\n• Predictive Guardrails - Mitigate anomalies before they happen\n• Contextual Memory - Persistent vector storage across sessions\n\nWhich feature would you like to know more about?',
+      integration: 'Most integrations take just 2-4 hours with our comprehensive API documentation and SDKs. Enterprise clients get dedicated onboarding support.\n\nWould you like help getting started?',
+      security: 'We use enterprise-grade encryption and comply with SOC 2 Type II standards. All data is encrypted in transit and at rest. We guarantee 99.99% uptime.',
+      trial: 'We offer a 14-day free trial with full access to all features. Contact our sales team to get started!',
+      demo: 'I can connect you with our team to schedule a personalized demo. Would you like me to take your contact info?',
+      default: 'I\'m here to help! You can ask me about:\n• Pricing & plans\n• Features & capabilities\n• Integration & setup\n• Security & compliance\n• Demos & trials\n\nWhat would you like to know?'
+    };
+
+    // Toggle chatbot window
+    chatbotToggle.addEventListener('click', () => {
+      chatbotWindow.classList.toggle('active');
+      if (chatbotWindow.classList.contains('active')) {
+        chatbotInput.focus();
+        logEvent('chatbot_opened');
+      }
+    });
+
+    // Close chatbot
+    chatbotClose.addEventListener('click', () => {
+      chatbotWindow.classList.remove('active');
+    });
+
+    // Send message
+    function sendMessage(text) {
+      if (!text.trim()) return;
+
+      // Add user message
+      const userMessage = document.createElement('div');
+      userMessage.className = 'chatbot-message user';
+      userMessage.textContent = text;
+      chatbotMessages.appendChild(userMessage);
+
+      // Log interaction
+      logEvent('chatbot_message_sent', { message: text });
+
+      // Simulate bot response delay
+      setTimeout(() => {
+        const response = getBotResponse(text);
+        const botMessage = document.createElement('div');
+        botMessage.className = 'chatbot-message bot';
+        botMessage.textContent = response;
+        chatbotMessages.appendChild(botMessage);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+
+        // Log response
+        logEvent('chatbot_response', { response: response });
+
+        // Check if should collect contact info
+        if (text.toLowerCase().includes('contact') || text.toLowerCase().includes('sales')) {
+          setTimeout(() => {
+            const contactPrompt = document.createElement('div');
+            contactPrompt.className = 'chatbot-message bot';
+            contactPrompt.textContent = 'Would you like to leave your email so our team can reach out?';
+            chatbotMessages.appendChild(contactPrompt);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+          }, 1000);
         }
-      }, 16);
+      }, 600);
+
+      // Clear input
+      chatbotInput.value = '';
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
     }
 
-    // Trigger animation when stats section is visible
-    const statsSection = document.querySelector('.stats');
-    let statsAnimated = false;
-    
+    // Get bot response based on keywords
+    function getBotResponse(text) {
+      const lower = text.toLowerCase();
+
+      if (lower.includes('pricing') || lower.includes('cost') || lower.includes('price')) {
+        return chatbotResponses.pricing;
+      } else if (lower.includes('feature') || lower.includes('capabilities')) {
+        return chatbotResponses.features;
+      } else if (lower.includes('integration') || lower.includes('implement')) {
+        return chatbotResponses.integration;
+      } else if (lower.includes('security') || lower.includes('safe') || lower.includes('encrypt')) {
+        return chatbotResponses.security;
+      } else if (lower.includes('trial') || lower.includes('free')) {
+        return chatbotResponses.trial;
+      } else if (lower.includes('demo') || lower.includes('watch')) {
+        return chatbotResponses.demo;
+      } else if (lower.includes('contact') || lower.includes('sales')) {
+        return 'Great! I\'d love to connect you with our sales team. Can I get your email address?';
+      } else {
+        return chatbotResponses.default;
+      }
+    }
+
+    // Send button click
+    chatbotSend.addEventListener('click', () => {
+      sendMessage(chatbotInput.value);
+    });
+
+    // Enter key to send
+    chatbotInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        sendMessage(chatbotInput.value);
+      }
+    });
+
+    // Quick replies
+    document.querySelectorAll('.quick-reply-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const text = btn.textContent;
+        sendMessage(text);
+        quickReplies.style.display = 'none';
+      });
+    });
+
+    // ============================================================================
+    // ANALYTICS & TRACKING
+    // ============================================================================
+
+    function logEvent(eventName, eventData = {}) {
+      // Log to Google Analytics
+      if (typeof gtag !== 'undefined') {
+        gtag('event', eventName, eventData);
+      }
+
+      // Log to local storage for dashboard
+      const events = JSON.parse(localStorage.getItem('kaelEvents') || '[]');
+      events.push({
+        event: eventName,
+        timestamp: new Date().toISOString(),
+        data: eventData
+      });
+      localStorage.setItem('kaelEvents', JSON.stringify(events.slice(-100))); // Keep last 100 events
+    }
+
+    // Track page views
+    logEvent('page_view', { page: window.location.pathname });
+
+    // Track button clicks
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        logEvent('button_click', { button: btn.textContent, location: btn.closest('section')?.id || 'unknown' });
+      });
+    });
+
+    // Track form interaction
+    document.querySelectorAll('input, textarea').forEach(field => {
+      field.addEventListener('focus', () => {
+        logEvent('form_field_focus', { field: field.name || field.placeholder });
+      });
+    });
+
+    // Track scroll depth
+    let maxScroll = 0;
     window.addEventListener('scroll', () => {
-      if (!statsAnimated && statsSection) {
-        const rect = statsSection.getBoundingClientRect();
-        if (rect.top < window.innerHeight) {
-          statsAnimated = true;
-          const statElements = document.querySelectorAll('.stat strong');
-          statElements.forEach(el => {
-            const text = el.textContent.replace(/[^0-9.]/g, '');
-            const number = parseFloat(text);
-            if (!isNaN(number)) {
-              animateCounter(el, number > 10 ? number : number);
-            }
-          });
+      const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+      if (scrollPercent > maxScroll) {
+        maxScroll = scrollPercent;
+        if (maxScroll % 25 === 0) {
+          logEvent('scroll_depth', { depth: Math.round(maxScroll) });
         }
       }
     });
 
-    // FAQ Accordion
+    // ============================================================================
+    // LEAD SCORING
+    // ============================================================================
+
+    let leadScore = 0;
+
+    function scoreEvent(points, eventName) {
+      leadScore += points;
+      logEvent('lead_score_updated', { totalScore: leadScore, event: eventName });
+
+      // Determine lead tier
+      let tier = 'unknown';
+      if (leadScore >= 80) tier = 'hot';
+      else if (leadScore >= 50) tier = 'warm';
+      else if (leadScore >= 20) tier = 'cold';
+
+      // Send to backend if hot/warm
+      if ((tier === 'hot' || tier === 'warm') && leadScore % 10 === 0) {
+        logEvent('lead_qualified', { score: leadScore, tier: tier });
+      }
+    }
+
+    // Score various interactions
+    document.getElementById('newsletter-form')?.addEventListener('submit', () => {
+      scoreEvent(20, 'newsletter_signup');
+    });
+
+    document.getElementById('contact-form')?.addEventListener('submit', () => {
+      scoreEvent(25, 'contact_form_submit');
+    });
+
+    document.querySelectorAll('a[href*="pricing"]').forEach(link => {
+      link.addEventListener('click', () => scoreEvent(20, 'pricing_click'));
+    });
+
+    document.querySelectorAll('a[href*="features"]').forEach(link => {
+      link.addEventListener('click', () => scoreEvent(15, 'features_click'));
+    });
+
+    // FAQ clicks = interest
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => scoreEvent(10, 'faq_viewed'));
+    });
+
+    // ============================================================================
+    // FAQ ACCORDION
+    // ============================================================================
+
     const faqItems = document.querySelectorAll('.faq-item');
     faqItems.forEach(item => {
       const question = item.querySelector('.faq-question');
@@ -1201,13 +1582,11 @@
       question.addEventListener('click', () => {
         const isActive = answer.classList.contains('active');
         
-        // Close all other FAQs
         faqItems.forEach(otherItem => {
           otherItem.querySelector('.faq-answer').classList.remove('active');
           otherItem.querySelector('.faq-toggle').classList.remove('active');
         });
         
-        // Toggle current FAQ
         if (!isActive) {
           answer.classList.add('active');
           toggle.classList.add('active');
@@ -1215,7 +1594,10 @@
       });
     });
 
-    // Intersection Observer for fade-in animations
+    // ============================================================================
+    // INTERSECTION OBSERVER FOR ANIMATIONS
+    // ============================================================================
+
     const observerOptions = {
       threshold: 0.1,
       rootMargin: '0px 0px -50px 0px'

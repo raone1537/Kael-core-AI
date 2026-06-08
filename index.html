@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kael Core AI</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: radial-gradient(circle at top, #1f2937 0%, #0f172a 45%, #020617 100%);
+      color: #e5e7eb;
+      line-height: 1.6;
+    }
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(2, 6, 23, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .nav {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      padding: 14px 0;
+      position: relative;
+    }
+    .nav-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
+      font-weight: 800;
+      color: #f8fafc;
+    }
+    .logo-icon {
+      font-size: 26px;
+      filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.5));
+    }
+    
+    /* Mobile Menu Button styles */
+    .menu-toggle {
+      background: none;
+      border: none;
+      color: #cbd5e1;
+      font-size: 24px;
+      cursor: pointer;
+      display: block; /* Visible on mobile by default */
+      padding: 4px;
+    }
+    
+    /* Responsive Navigation Links Setup */
+    .nav-links {
+      display: none; /* Hidden on mobile until toggled */
+      flex-direction: column;
+      width: 100%;
+      text-align: center;
+      gap: 16px;
+      list-style: none;
+      font-size: 16px;
+      padding: 10px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .nav-links.active {
+      display: flex; /* Shown when JS applies the active class */
+    }
+    .nav-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-weight: 600;
+      display: block;
+      padding: 8px 0;
+    }
+    .nav-links a:hover {
+      color: #a78bfa;
+    }
+    .hero {
+      padding: 72px 0 56px;
+      text-align: center;
+    }
+    .hero-card {
+      background: rgba(15, 23, 42, 0.82);
+      border: 1px solid rgba(168, 85, 247, 0.18);
+      border-radius: 28px;
+      padding: 36px 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    }
+    .hero h1 {
+      font-size: 40px;
+      line-height: 1.1;
+      color: #f8fafc;
+      margin-bottom: 18px;
+    }
+    .hero p {
+      font-size: 17px;
+      color: #cbd5e1;
+      max-width: 720px;
+      margin: 0 auto 28px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%);
+      box-shadow: 0 14px 28px rgba(124, 58, 237, 0.28);
+      border: none;
+      cursor: pointer;
+    }
+    .section {
+      padding: 56px 0;
+    }
+    .section h2 {
+      text-align: center;
+      font-size: 30px;
+      color: #f8fafc;
+      margin-bottom: 28px;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .feature-card {
+      background: rgba(15, 23, 42, 0.82);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+    }
+    .feature-card h3 {
+      font-size: 20px;
+      color: #a78bfa;
+      margin-bottom: 10px;
+    }
+    .feature-card p {
+      color: #cbd5e1;
+      font-size: 15px;
+    }
+    .about {
+      background: linear-gradient(135deg, rgba(124,58,237,0.22), rgba(37,99,235,0.18));
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      border-radius: 28px;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+    }
+    .about h2 {
+      margin-bottom: 16px;
+      color: #f8fafc;
+    }
+    .about p {
+      max-width: 820px;
+      margin: 0 auto;
+      font-size: 17px;
+      color: #dbe4f0;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 26px;
+    }
+    .stat {
+      background: rgba(2, 6, 23, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 18px;
+      color: #e2e8f0;
+    }
+    .stat strong {
+      display: block;
+      font-size: 28px;
+      margin-bottom: 6px;
+      color: #fff;
+    }
+    .contact-form {
+      max-width: 700px;
+      margin: 0 auto;
+      display: grid;
+      gap: 14px;
+    }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 15px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      font-size: 16px;
+      outline: none;
+      background: rgba(15, 23, 42, 0.82);
+      color: #e5e7eb;
+    }
+    .contact-form input::placeholder, .contact-form textarea::placeholder {
+      color: #94a3b8;
+    }
+    .contact-form textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+    footer {
+      padding: 26px 0 36px;
+      text-align: center;
+      color: #94a3b8;
+      font-size: 14px;
+    }
+
+    /* Desktop and Tablet Layout Adjustments */
+    @media (min-width: 768px) {
+      .nav {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 14px 0;
+      }
+      .nav-header {
+        width: auto;
+      }
+      .menu-toggle {
+        display: none; /* Hide toggle menu button on desktop screens */
+      }
+      .nav-links {
+        display: flex !important; /* Always display links on desktop */
+        flex-direction: row;
+        width: auto;
+        gap: 24px;
+        padding: 0;
+        border-top: none;
+      }
+      .nav-links a {
+        padding: 0;
+      }
+      .hero {
+        padding: 96px 0 72px;
+      }
+      .hero-card {
+        padding: 56px 48px;
+      }
+      .hero h1 {
+        font-size: 58px;
+      }
+      .hero p {
+        font-size: 20px;
+      }
+      .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+      .stats {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav">
+      <!-- Container for Logo and Mobile Button -->
+      <div class="nav-header">
+        <div class="logo">
+          <span class="logo-icon">🔮</span>
+          <span>Kael Core</span>
+        </div>
+        <!-- Hamburger Button -->
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">☰</button>
+      </div>
+      
+      <!-- Navigation Links Links -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-card">
+        <h1>Next-Gen AI Core</h1>
+        <p>Unleash unparalleled computational intelligence. Kael Core automates complex workflows, provides deep predictive analytics, and integrates seamlessly into your software stack.</p>
+        <a href="#contact" class="btn">Get Started</a>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section">
+      <h2>Advanced Features</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>Neural Orchestration</h3>
+          <p>Dynamically scale complex multi-agent tasks with real-time optimization models.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Predictive Guardrails</h3>
+          <p>Mitigate anomalies before they trigger downstream pipeline production blocks.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Contextual Memory</h3>
+          <p>Utilize persistent vector storage spaces to maintain system states across long sessions.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About / Stats Section -->
+    <section id="about" class="section">
+      <div class="about">
+        <h2>Built for Enterprise Scaling</h2>
+        <p>Engineered to handle heavy concurrent infrastructure demands with absolute zero downtime architecture deployments.</p>
+        <div class="stats">
+          <div class="stat">
+            <strong>99.99%</strong>
+            Uptime Guarantee
+          </div>
+          <div class="stat">
+            <strong>&lt; 45ms</strong>
+            Average Latency
+          </div>
+          <div class="stat">
+            <strong>15M+</strong>
+            Daily API Requests
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+      <h2>Connect with Our Engineers</h2>
+      <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent successfully!');">
+        <input type="text" placeholder="Your Name" required />
+        <input type="email" placeholder="Your Email Address" required />
+        <textarea placeholder="Describe your operational bottleneck..." required></textarea>
+        <button type="submit" class="btn">Request API Access</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Kael Core AI Technologies Inc. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Script to toggle mobile menu -->
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    // Toggle menu visibility when button is clicked
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      // Switch button icons between ☰ and ✕

@@ -247,6 +247,10 @@
     .btn:active {
       transform: translateY(-1px);
     }
+    .btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
     .section {
       padding: 56px 0;
     }
@@ -608,6 +612,39 @@
       color: #94a3b8;
     }
     
+    /* Form Messages */
+    .form-success {
+      color: #10b981;
+      font-size: 14px;
+      padding: 12px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 8px;
+      margin-top: 12px;
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+    .form-success.show {
+      display: block;
+    }
+    .form-error {
+      color: #ef4444;
+      font-size: 13px;
+      padding: 8px 12px;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 6px;
+      margin-top: 8px;
+      display: none;
+    }
+    .form-error.show {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
     /* Contact Form */
     .contact-form {
       max-width: 700px;
@@ -923,9 +960,11 @@
     <section class="newsletter">
       <h3>Stay Updated</h3>
       <p>Subscribe to our newsletter for the latest AI insights and product updates.</p>
-      <form class="newsletter-form" id="newsletterForm">
-        <input type="email" class="newsletter-input" placeholder="Enter your email" required />
-        <button type="submit" class="btn">Subscribe</button>
+      <form class="newsletter-form" id="newsletter-form">
+        <input type="email" name="email" class="newsletter-input" placeholder="Enter your email" data-fs-field required />
+        <div class="form-error" id="newsletter-error" data-fs-error="email"></div>
+        <button type="submit" class="btn" data-fs-submit-btn>Subscribe</button>
+        <div class="form-success" id="newsletter-success" data-fs-success>✓ Thanks for subscribing! Check your email.</div>
       </form>
     </section>
 
@@ -993,11 +1032,15 @@
     <!-- Contact Section -->
     <section id="contact" class="section">
       <h2>Connect with Our Engineers</h2>
-      <form class="contact-form" id="contactForm">
-        <input type="text" placeholder="Your Name" required />
-        <input type="email" placeholder="Your Email Address" required />
-        <textarea placeholder="Describe your operational bottleneck..." required></textarea>
-        <button type="submit" class="btn">Request API Access</button>
+      <form class="contact-form" id="contact-form">
+        <input type="text" name="name" placeholder="Your Name" data-fs-field required />
+        <div class="form-error" data-fs-error="name"></div>
+        <input type="email" name="email" placeholder="Your Email Address" data-fs-field required />
+        <div class="form-error" data-fs-error="email"></div>
+        <textarea name="message" placeholder="Describe your operational bottleneck..." data-fs-field required></textarea>
+        <div class="form-error" data-fs-error="message"></div>
+        <button type="submit" class="btn" data-fs-submit-btn>Request API Access</button>
+        <div class="form-success" id="contact-success" data-fs-success>✓ Message sent successfully! We'll contact you shortly.</div>
       </form>
     </section>
   </main>
@@ -1013,21 +1056,21 @@
         </div>
         <div class="footer-section">
           <h4>Company</h4>
-          <a href="#">About Us</a>
-          <a href="#">Blog</a>
-          <a href="#">Careers</a>
+          <a href="#about">About Us</a>
+          <a href="#blog">Blog</a>
+          <a href="#careers">Careers</a>
         </div>
         <div class="footer-section">
           <h4>Resources</h4>
-          <a href="#">Documentation</a>
-          <a href="#">API Reference</a>
-          <a href="#">Support</a>
+          <a href="#docs">Documentation</a>
+          <a href="#api">API Reference</a>
+          <a href="#support">Support</a>
         </div>
         <div class="footer-section">
           <h4>Legal</h4>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-          <a href="#">Contact</a>
+          <a href="#privacy">Privacy Policy</a>
+          <a href="#terms">Terms of Service</a>
+          <a href="#contact">Contact</a>
         </div>
       </div>
       <div class="footer-bottom">
@@ -1068,6 +1111,14 @@
     gtag('config', 'G-XXXXXXXXXX'); // Replace with your Google Analytics ID
   </script>
 
+  <!-- Formspree AJAX Library -->
+  <script>
+    window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+    formspree('initForm', { formElement: '#newsletter-form', formId: 'xdavgwgd' });
+    formspree('initForm', { formElement: '#contact-form', formId: 'xdavgwgd' });
+  </script>
+  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+
   <!-- Main Script -->
   <script>
     // Mobile Menu Toggle
@@ -1088,7 +1139,6 @@
 
     // Theme Toggle (Dark/Light Mode)
     const themeToggle = document.getElementById('themeToggle');
-    const htmlElement = document.documentElement;
     
     // Check for saved theme preference or default to dark mode
     const currentTheme = localStorage.getItem('theme') || 'dark';
@@ -1164,26 +1214,6 @@
         }
       });
     });
-
-    // Newsletter Form
-    const newsletterForm = document.getElementById('newsletterForm');
-    if (newsletterForm) {
-      newsletterForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        alert('Thank you for subscribing! Check your email for confirmation.');
-        newsletterForm.reset();
-      });
-    }
-
-    // Contact Form
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-      contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        alert('Thank you for reaching out! We\'ll contact you shortly.');
-        contactForm.reset();
-      });
-    }
 
     // Intersection Observer for fade-in animations
     const observerOptions = {

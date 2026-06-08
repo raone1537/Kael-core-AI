@@ -1,0 +1,8 @@
+# Example CNAME file
+# To use a custom domain:
+# 1. Replace 'yourdomain.com' with your actual domain
+# 2. Rename this file to 'CNAME' (remove .example)
+# 3. Configure your domain DNS to point to GitHub Pages
+# 4. GitHub will automatically detect it
+
+yourdomain.com

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /private/
+
+Sitemap: https://raone1537.github.io/kael-core-ai/sitemap.xml

@@ -3,7 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kael Core AI</title>
+  <meta name="description" content="Kael Core AI - Next-Gen AI Core for enterprise automation, predictive analytics, and intelligent workflow orchestration. 99.99% uptime guarantee." />
+  <meta name="keywords" content="AI, Machine Learning, Automation, Analytics, Enterprise, API" />
+  <meta name="author" content="Kael Core AI Technologies Inc." />
+  <meta property="og:title" content="Kael Core AI - Next-Gen AI Intelligence" />
+  <meta property="og:description" content="Unleash unparalleled computational intelligence with Kael Core. Automate workflows, predictive analytics, seamless integration." />
+  <meta property="og:image" content="https://raone1537.github.io/kael-core-ai/og-image.png" />
+  <meta property="og:url" content="https://raone1537.github.io/kael-core-ai/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔮</text></svg>" />
+  <title>Kael Core AI - Next-Gen AI Intelligence</title>
   <style>
     * {
       margin: 0;
@@ -14,10 +23,11 @@
       scroll-behavior: smooth;
     }
     body {
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: radial-gradient(circle at top, #1f2937 0%, #0f172a 45%, #020617 100%);
       color: #e5e7eb;
       line-height: 1.6;
+      min-height: 100vh;
     }
     .container {
       width: 100%;
@@ -29,9 +39,10 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: rgba(2, 6, 23, 0.9);
+      background: rgba(2, 6, 23, 0.95);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s ease;
     }
     .nav {
       display: flex;
@@ -54,26 +65,39 @@
       font-size: 22px;
       font-weight: 800;
       color: #f8fafc;
+      text-decoration: none;
+      transition: transform 0.3s ease;
+    }
+    .logo:hover {
+      transform: scale(1.05);
     }
     .logo-icon {
       font-size: 26px;
       filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.5));
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
     }
     
-    /* Mobile Menu Button styles */
     .menu-toggle {
       background: none;
       border: none;
       color: #cbd5e1;
       font-size: 24px;
       cursor: pointer;
-      display: block; /* Visible on mobile by default */
+      display: block;
       padding: 4px;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    .menu-toggle:hover {
+      color: #a78bfa;
+      transform: scale(1.1);
     }
     
-    /* Responsive Navigation Links Setup */
     .nav-links {
-      display: none; /* Hidden on mobile until toggled */
+      display: none;
       flex-direction: column;
       width: 100%;
       text-align: center;
@@ -82,9 +106,20 @@
       font-size: 16px;
       padding: 10px 0;
       border-top: 1px solid rgba(255, 255, 255, 0.05);
+      animation: slideDown 0.3s ease;
+    }
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     .nav-links.active {
-      display: flex; /* Shown when JS applies the active class */
+      display: flex;
     }
     .nav-links a {
       color: #cbd5e1;
@@ -92,13 +127,78 @@
       font-weight: 600;
       display: block;
       padding: 8px 0;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
     }
     .nav-links a:hover {
       color: #a78bfa;
+      text-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
     }
+    
+    /* Theme Toggle */
+    .theme-toggle {
+      background: rgba(124, 58, 237, 0.1);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      color: #a78bfa;
+      padding: 8px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      margin-left: auto;
+    }
+    .theme-toggle:hover {
+      background: rgba(124, 58, 237, 0.2);
+      transform: scale(1.05);
+    }
+    body.light-mode {
+      background: linear-gradient(135deg, #f0f4f8 0%, #d9e8f5 100%);
+      color: #1e293b;
+    }
+    body.light-mode header {
+      background: rgba(255, 255, 255, 0.95);
+      border-bottom-color: rgba(0, 0, 0, 0.1);
+    }
+    body.light-mode .logo {
+      color: #1e293b;
+    }
+    body.light-mode .nav-links a {
+      color: #334155;
+    }
+    body.light-mode .nav-links a:hover {
+      color: #7c3aed;
+    }
+    body.light-mode .hero-card,
+    body.light-mode .feature-card,
+    body.light-mode .stat {
+      background: rgba(255, 255, 255, 0.9);
+      color: #1e293b;
+    }
+    body.light-mode .feature-card h3 {
+      color: #7c3aed;
+    }
+    body.light-mode .hero h1 {
+      color: #0f172a;
+    }
+    
     .hero {
       padding: 72px 0 56px;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, transparent 70%);
+      animation: parallax 20s linear infinite;
+    }
+    @keyframes parallax {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
     }
     .hero-card {
       background: rgba(15, 23, 42, 0.82);
@@ -106,6 +206,14 @@
       border-radius: 28px;
       padding: 36px 20px;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      position: relative;
+      z-index: 1;
+      transition: all 0.4s ease;
+    }
+    .hero-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 30px 80px rgba(124, 58, 237, 0.2);
+      border-color: rgba(168, 85, 247, 0.35);
     }
     .hero h1 {
       font-size: 40px;
@@ -130,6 +238,14 @@
       box-shadow: 0 14px 28px rgba(124, 58, 237, 0.28);
       border: none;
       cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 40px rgba(124, 58, 237, 0.4);
+    }
+    .btn:active {
+      transform: translateY(-1px);
     }
     .section {
       padding: 56px 0;
@@ -139,6 +255,17 @@
       font-size: 30px;
       color: #f8fafc;
       margin-bottom: 28px;
+      animation: fadeInUp 0.6s ease;
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     .features-grid {
       display: grid;
@@ -151,6 +278,13 @@
       border-radius: 20px;
       padding: 22px;
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.6s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(124, 58, 237, 0.15);
+      border-color: rgba(168, 85, 247, 0.3);
     }
     .feature-card h3 {
       font-size: 20px;
@@ -191,13 +325,290 @@
       border-radius: 18px;
       padding: 18px;
       color: #e2e8f0;
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.6s ease;
+    }
+    .stat:hover {
+      transform: scale(1.03);
+      border-color: rgba(168, 85, 247, 0.3);
     }
     .stat strong {
       display: block;
       font-size: 28px;
       margin-bottom: 6px;
       color: #fff;
+      font-variant-numeric: tabular-nums;
     }
+    
+    /* Use Cases Section */
+    .use-cases-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 28px;
+    }
+    .use-case {
+      background: rgba(15, 23, 42, 0.82);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      gap: 15px;
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.6s ease;
+    }
+    .use-case:hover {
+      transform: translateX(8px);
+      border-color: rgba(168, 85, 247, 0.3);
+    }
+    .use-case-icon {
+      font-size: 32px;
+      min-width: 40px;
+      text-align: center;
+    }
+    .use-case-content h4 {
+      color: #a78bfa;
+      margin-bottom: 6px;
+      font-size: 16px;
+    }
+    .use-case-content p {
+      color: #cbd5e1;
+      font-size: 14px;
+    }
+    
+    /* Testimonials Section */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-top: 28px;
+    }
+    .testimonial {
+      background: rgba(15, 23, 42, 0.82);
+      border: 1px solid rgba(168, 85, 247, 0.18);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.6s ease;
+    }
+    .testimonial:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 40px rgba(124, 58, 237, 0.15);
+    }
+    .testimonial-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin: 0 auto 12px;
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+    }
+    .testimonial-text {
+      color: #cbd5e1;
+      font-size: 15px;
+      margin-bottom: 12px;
+      font-style: italic;
+    }
+    .testimonial-author {
+      color: #a78bfa;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    .testimonial-role {
+      color: #64748b;
+      font-size: 12px;
+    }
+    .testimonial-stars {
+      color: #fbbf24;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+    
+    /* Pricing Section */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-top: 28px;
+    }
+    .pricing-card {
+      background: rgba(15, 23, 42, 0.82);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 20px;
+      padding: 28px;
+      text-align: center;
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.6s ease;
+      position: relative;
+    }
+    .pricing-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(168, 85, 247, 0.4);
+      box-shadow: 0 20px 50px rgba(124, 58, 237, 0.2);
+    }
+    .pricing-card.featured {
+      border: 2px solid rgba(168, 85, 247, 0.5);
+      background: rgba(15, 23, 42, 0.95);
+    }
+    .pricing-card.featured::before {
+      content: 'POPULAR';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%);
+      color: white;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .pricing-title {
+      font-size: 22px;
+      color: #f8fafc;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    .pricing-price {
+      font-size: 38px;
+      color: #a78bfa;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .pricing-period {
+      color: #64748b;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .pricing-features {
+      text-align: left;
+      margin: 20px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .pricing-feature {
+      color: #cbd5e1;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .pricing-feature::before {
+      content: '✓';
+      color: #10b981;
+      font-weight: 800;
+      font-size: 16px;
+    }
+    .pricing-btn {
+      width: 100%;
+      margin-top: 20px;
+    }
+    
+    /* FAQ Section */
+    .faq-container {
+      max-width: 700px;
+      margin: 28px auto 0;
+    }
+    .faq-item {
+      background: rgba(15, 23, 42, 0.82);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      animation: fadeInUp 0.6s ease;
+    }
+    .faq-question {
+      padding: 18px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.82);
+      color: #a78bfa;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .faq-question:hover {
+      background: rgba(124, 58, 237, 0.1);
+    }
+    .faq-toggle {
+      font-size: 20px;
+      transition: transform 0.3s ease;
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background: rgba(2, 6, 23, 0.5);
+      padding: 0 18px;
+    }
+    .faq-answer.active {
+      max-height: 500px;
+      padding: 18px;
+    }
+    .faq-toggle.active {
+      transform: rotate(180deg);
+    }
+    .faq-text {
+      color: #cbd5e1;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    
+    /* Newsletter Section */
+    .newsletter {
+      background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(37,99,235,0.1));
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      border-radius: 20px;
+      padding: 40px 20px;
+      text-align: center;
+      margin: 40px 0;
+    }
+    .newsletter h3 {
+      color: #f8fafc;
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+    .newsletter p {
+      color: #cbd5e1;
+      margin-bottom: 24px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .newsletter-input {
+      padding: 14px 16px;
+      border-radius: 8px;
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      background: rgba(15, 23, 42, 0.82);
+      color: #e5e7eb;
+      font-size: 15px;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+    .newsletter-input:focus {
+      border-color: rgba(168, 85, 247, 0.6);
+      box-shadow: 0 0 12px rgba(168, 85, 247, 0.2);
+    }
+    .newsletter-input::placeholder {
+      color: #94a3b8;
+    }
+    
+    /* Contact Form */
     .contact-form {
       max-width: 700px;
       margin: 0 auto;
@@ -213,6 +624,11 @@
       outline: none;
       background: rgba(15, 23, 42, 0.82);
       color: #e5e7eb;
+      transition: all 0.3s ease;
+    }
+    .contact-form input:focus, .contact-form textarea:focus {
+      border-color: rgba(168, 85, 247, 0.6);
+      box-shadow: 0 0 12px rgba(168, 85, 247, 0.2);
     }
     .contact-form input::placeholder, .contact-form textarea::placeholder {
       color: #94a3b8;
@@ -221,11 +637,42 @@
       min-height: 150px;
       resize: vertical;
     }
+    
     footer {
-      padding: 26px 0 36px;
+      padding: 40px 0;
       text-align: center;
       color: #94a3b8;
       font-size: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: 56px;
+    }
+    .footer-content {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .footer-section h4 {
+      color: #f8fafc;
+      font-size: 14px;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    .footer-section a {
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 13px;
+      display: block;
+      margin-bottom: 8px;
+      transition: color 0.3s ease;
+    }
+    .footer-section a:hover {
+      color: #a78bfa;
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 20px;
+      font-size: 12px;
     }
 
     /* Desktop and Tablet Layout Adjustments */
@@ -237,17 +684,19 @@
       }
       .nav-header {
         width: auto;
+        gap: 20px;
       }
       .menu-toggle {
-        display: none; /* Hide toggle menu button on desktop screens */
+        display: none;
       }
       .nav-links {
-        display: flex !important; /* Always display links on desktop */
+        display: flex !important;
         flex-direction: row;
         width: auto;
         gap: 24px;
         padding: 0;
         border-top: none;
+        animation: none;
       }
       .nav-links a {
         padding: 0;
@@ -268,9 +717,31 @@
         grid-template-columns: repeat(3, 1fr);
         gap: 24px;
       }
+      .use-cases-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+      .use-case {
+        flex-direction: column;
+        text-align: center;
+      }
+      .use-case-icon {
+        text-align: center;
+      }
+      .testimonials-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      .pricing-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
       .stats {
         grid-template-columns: repeat(3, 1fr);
         gap: 20px;
+      }
+      .footer-content {
+        grid-template-columns: repeat(4, 1fr);
       }
     }
   </style>
@@ -279,20 +750,21 @@
 
   <header>
     <div class="container nav">
-      <!-- Container for Logo and Mobile Button -->
       <div class="nav-header">
-        <div class="logo">
+        <a href="#" class="logo">
           <span class="logo-icon">🔮</span>
           <span>Kael Core</span>
-        </div>
-        <!-- Hamburger Button -->
+        </a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle Dark/Light Mode">🌙</button>
         <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">☰</button>
       </div>
       
-      <!-- Navigation Links -->
       <ul class="nav-links" id="navLinks">
         <li><a href="#features">Features</a></li>
-        <li><a href="#about">About</a></li>
+        <li><a href="#use-cases">Use Cases</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#faq">FAQ</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
@@ -327,23 +799,192 @@
       </div>
     </section>
 
-    <!-- About / Stats Section -->
-    <section id="about" class="section">
-      <div class="about">
-        <h2>Built for Enterprise Scaling</h2>
-        <p>Engineered to handle heavy concurrent infrastructure demands with absolute zero downtime architecture deployments.</p>
-        <div class="stats">
-          <div class="stat">
-            <strong>99.99%</strong>
-            Uptime Guarantee
+    <!-- Use Cases Section -->
+    <section id="use-cases" class="section">
+      <h2>Real-World Applications</h2>
+      <div class="use-cases-grid">
+        <div class="use-case">
+          <div class="use-case-icon">🔄</div>
+          <div class="use-case-content">
+            <h4>Automate Data Pipelines</h4>
+            <p>Process millions of data points with intelligent extraction and transformation workflows.</p>
           </div>
-          <div class="stat">
-            <strong>&lt; 45ms</strong>
-            Average Latency
+        </div>
+        <div class="use-case">
+          <div class="use-case-icon">🛡️</div>
+          <div class="use-case-content">
+            <h4>Real-time Fraud Detection</h4>
+            <p>Detect anomalies and suspicious patterns in real-time with advanced ML models.</p>
           </div>
-          <div class="stat">
-            <strong>15M+</strong>
-            Daily API Requests
+        </div>
+        <div class="use-case">
+          <div class="use-case-icon">💬</div>
+          <div class="use-case-content">
+            <h4>Intelligent Chatbots</h4>
+            <p>Build conversational AI that understands context and delivers meaningful responses.</p>
+          </div>
+        </div>
+        <div class="use-case">
+          <div class="use-case-icon">📊</div>
+          <div class="use-case-content">
+            <h4>Predictive Analytics</h4>
+            <p>Forecast trends and make data-driven decisions with powerful predictive models.</p>
+          </div>
+        </div>
+        <div class="use-case">
+          <div class="use-case-icon">🤖</div>
+          <div class="use-case-content">
+            <h4>Process Automation</h4>
+            <p>Streamline repetitive tasks and free up your team for strategic work.</p>
+          </div>
+        </div>
+        <div class="use-case">
+          <div class="use-case-icon">🔍</div>
+          <div class="use-case-content">
+            <h4>Intelligent Search</h4>
+            <p>Deliver semantic search results that truly understand user intent.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="section">
+      <h2>Simple, Transparent Pricing</h2>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-title">Starter</div>
+          <div class="pricing-price">$299</div>
+          <div class="pricing-period">per month</div>
+          <div class="pricing-features">
+            <div class="pricing-feature">Up to 1M API calls</div>
+            <div class="pricing-feature">Basic support</div>
+            <div class="pricing-feature">2 AI agents</div>
+            <div class="pricing-feature">1GB storage</div>
+          </div>
+          <a href="#contact" class="btn pricing-btn">Get Started</a>
+        </div>
+        <div class="pricing-card featured">
+          <div class="pricing-title">Professional</div>
+          <div class="pricing-price">$999</div>
+          <div class="pricing-period">per month</div>
+          <div class="pricing-features">
+            <div class="pricing-feature">Up to 15M API calls</div>
+            <div class="pricing-feature">Priority support</div>
+            <div class="pricing-feature">10 AI agents</div>
+            <div class="pricing-feature">100GB storage</div>
+          </div>
+          <a href="#contact" class="btn pricing-btn">Get Started</a>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-title">Enterprise</div>
+          <div class="pricing-price">Custom</div>
+          <div class="pricing-period">contact sales</div>
+          <div class="pricing-features">
+            <div class="pricing-feature">Unlimited API calls</div>
+            <div class="pricing-feature">24/7 dedicated support</div>
+            <div class="pricing-feature">Unlimited AI agents</div>
+            <div class="pricing-feature">Unlimited storage</div>
+          </div>
+          <a href="#contact" class="btn pricing-btn">Contact Sales</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section">
+      <h2>What Our Clients Say</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial">
+          <div class="testimonial-avatar">🚀</div>
+          <div class="testimonial-text">"Kael Core has transformed our data processing pipeline. We reduced processing time by 70% in the first month!"</div>
+          <div class="testimonial-author">Sarah Chen</div>
+          <div class="testimonial-role">CTO, DataFlow Inc</div>
+          <div class="testimonial-stars">★★★★★</div>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-avatar">💡</div>
+          <div class="testimonial-text">"The API integration was seamless and their support team is incredibly responsive. Highly recommend!"</div>
+          <div class="testimonial-author">Marcus Johnson</div>
+          <div class="testimonial-role">Lead Engineer, TechVenture</div>
+          <div class="testimonial-stars">★★★★★</div>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-avatar">⚡</div>
+          <div class="testimonial-text">"Kael Core's predictive analytics helped us identify fraud patterns we didn't even know existed. Game-changer."</div>
+          <div class="testimonial-author">Elena Rodriguez</div>
+          <div class="testimonial-role">Security Director, FinSecure</div>
+          <div class="testimonial-stars">★★★★★</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+      <h3>Stay Updated</h3>
+      <p>Subscribe to our newsletter for the latest AI insights and product updates.</p>
+      <form class="newsletter-form" id="newsletterForm">
+        <input type="email" class="newsletter-input" placeholder="Enter your email" required />
+        <button type="submit" class="btn">Subscribe</button>
+      </form>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-container">
+        <div class="faq-item">
+          <div class="faq-question">
+            What is Kael Core AI?
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-text">Kael Core is a next-generation AI platform that provides intelligent automation, predictive analytics, and seamless integration capabilities for enterprise applications.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            How does Kael Core ensure security?
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-text">We employ enterprise-grade encryption, regular security audits, and comply with SOC 2 Type II standards. All data is encrypted in transit and at rest.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            What is your SLA uptime guarantee?
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-text">We guarantee 99.99% uptime with our zero-downtime architecture. All enterprise clients receive dedicated infrastructure and redundancy.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            How quickly can I integrate Kael Core?
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-text">Most integrations take 2-4 hours with our comprehensive API documentation and SDKs. Enterprise clients receive dedicated onboarding support.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            What support options are available?
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-text">We offer email support for Starter plans, priority support for Professional plans, and 24/7 dedicated support for Enterprise clients.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            Can I scale from Starter to Enterprise later?
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-text">Absolutely! You can upgrade your plan anytime. We'll help ensure a smooth transition without any downtime or data loss.</div>
           </div>
         </div>
       </div>
@@ -352,7 +993,7 @@
     <!-- Contact Section -->
     <section id="contact" class="section">
       <h2>Connect with Our Engineers</h2>
-      <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent successfully!');">
+      <form class="contact-form" id="contactForm">
         <input type="text" placeholder="Your Name" required />
         <input type="email" placeholder="Your Email Address" required />
         <textarea placeholder="Describe your operational bottleneck..." required></textarea>
@@ -363,12 +1004,73 @@
 
   <footer>
     <div class="container">
-      <p>&copy; 2026 Kael Core AI Technologies Inc. All rights reserved.</p>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Product</h4>
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#use-cases">Use Cases</a>
+        </div>
+        <div class="footer-section">
+          <h4>Company</h4>
+          <a href="#">About Us</a>
+          <a href="#">Blog</a>
+          <a href="#">Careers</a>
+        </div>
+        <div class="footer-section">
+          <h4>Resources</h4>
+          <a href="#">Documentation</a>
+          <a href="#">API Reference</a>
+          <a href="#">Support</a>
+        </div>
+        <div class="footer-section">
+          <h4>Legal</h4>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Kael Core AI Technologies Inc. All rights reserved.</p>
+      </div>
     </div>
   </footer>
 
-  <!-- Script to toggle mobile menu -->
+  <!-- Structured Data (Schema.json) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Kael Core AI",
+    "description": "Next-Gen AI Core for enterprise automation, predictive analytics, and intelligent workflow orchestration.",
+    "url": "https://raone1537.github.io/kael-core-ai/",
+    "applicationCategory": "BusinessApplication",
+    "offers": {
+      "@type": "AggregateOffer",
+      "priceCurrency": "USD",
+      "lowPrice": "299",
+      "highPrice": "999"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "ratingCount": "3"
+    }
+  }
+  </script>
+
+  <!-- Analytics (Google Analytics) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX'); // Replace with your Google Analytics ID
+  </script>
+
+  <!-- Main Script -->
+  <script>
+    // Mobile Menu Toggle
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
 
@@ -377,12 +1079,129 @@
       menuToggle.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
     });
 
-    // Close menu when a link is clicked
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         navLinks.classList.remove('active');
         menuToggle.textContent = '☰';
       });
+    });
+
+    // Theme Toggle (Dark/Light Mode)
+    const themeToggle = document.getElementById('themeToggle');
+    const htmlElement = document.documentElement;
+    
+    // Check for saved theme preference or default to dark mode
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    if (currentTheme === 'light') {
+      document.body.classList.add('light-mode');
+      themeToggle.textContent = '☀️';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      const theme = document.body.classList.contains('light-mode') ? 'light' : 'dark';
+      localStorage.setItem('theme', theme);
+      themeToggle.textContent = theme === 'light' ? '☀️' : '🌙';
+    });
+
+    // Animated Stats Counter
+    function animateCounter(element, target, duration = 2000) {
+      let start = 0;
+      const increment = target / (duration / 16);
+      
+      const timer = setInterval(() => {
+        start += increment;
+        if (start >= target) {
+          element.textContent = target;
+          clearInterval(timer);
+        } else {
+          element.textContent = Math.floor(start);
+        }
+      }, 16);
+    }
+
+    // Trigger animation when stats section is visible
+    const statsSection = document.querySelector('.stats');
+    let statsAnimated = false;
+    
+    window.addEventListener('scroll', () => {
+      if (!statsAnimated && statsSection) {
+        const rect = statsSection.getBoundingClientRect();
+        if (rect.top < window.innerHeight) {
+          statsAnimated = true;
+          const statElements = document.querySelectorAll('.stat strong');
+          statElements.forEach(el => {
+            const text = el.textContent.replace(/[^0-9.]/g, '');
+            const number = parseFloat(text);
+            if (!isNaN(number)) {
+              animateCounter(el, number > 10 ? number : number);
+            }
+          });
+        }
+      }
+    });
+
+    // FAQ Accordion
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+      const answer = item.querySelector('.faq-answer');
+      const toggle = item.querySelector('.faq-toggle');
+      
+      question.addEventListener('click', () => {
+        const isActive = answer.classList.contains('active');
+        
+        // Close all other FAQs
+        faqItems.forEach(otherItem => {
+          otherItem.querySelector('.faq-answer').classList.remove('active');
+          otherItem.querySelector('.faq-toggle').classList.remove('active');
+        });
+        
+        // Toggle current FAQ
+        if (!isActive) {
+          answer.classList.add('active');
+          toggle.classList.add('active');
+        }
+      });
+    });
+
+    // Newsletter Form
+    const newsletterForm = document.getElementById('newsletterForm');
+    if (newsletterForm) {
+      newsletterForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Thank you for subscribing! Check your email for confirmation.');
+        newsletterForm.reset();
+      });
+    }
+
+    // Contact Form
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Thank you for reaching out! We\'ll contact you shortly.');
+        contactForm.reset();
+      });
+    }
+
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.feature-card, .use-case, .testimonial, .pricing-card, .faq-item').forEach(el => {
+      observer.observe(el);
     });
   </script>
 </body>

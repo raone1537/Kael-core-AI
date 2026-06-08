@@ -289,7 +289,7 @@
         <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">☰</button>
       </div>
       
-      <!-- Navigation Links Links -->
+      <!-- Navigation Links -->
       <ul class="nav-links" id="navLinks">
         <li><a href="#features">Features</a></li>
         <li><a href="#about">About</a></li>
@@ -372,7 +372,18 @@
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
 
-    // Toggle menu visibility when button is clicked
     menuToggle.addEventListener('click', () => {
       navLinks.classList.toggle('active');
-      // Switch button icons between ☰ and ✕
+      menuToggle.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+    });
+
+    // Close menu when a link is clicked
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        menuToggle.textContent = '☰';
+      });
+    });
+  </script>
+</body>
+</html>
